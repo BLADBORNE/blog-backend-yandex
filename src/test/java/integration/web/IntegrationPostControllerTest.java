@@ -91,7 +91,7 @@ public class IntegrationPostControllerTest extends AbstractIntegrationTest {
                 }
             """.formatted(postId);
 
-        mockMvc.perform(put("/posts/" + postId)
+        mockMvc.perform(put("/posts")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(updateJson))
             .andExpect(status().isOk())

@@ -1,5 +1,7 @@
 package ru.blog.backend.configuration;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +10,6 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
 import javax.sql.DataSource;
@@ -24,13 +25,13 @@ public class DataSourceConfiguration {
         @Value("${spring.datasource.password}") String password,
         @Value("${spring.datasource.driver-class-name}") String driverName
     ) {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(driverName);
-        dataSource.setUrl(url);
-        dataSource.setUsername(username);
-        dataSource.setPassword(password);
+        HikariConfig config = new HikariConfig();
+        config.setDriverClassName(driverName);
+        config.setJdbcUrl(url);
+        config.setUsername(username);
+        config.setPassword(password);
 
-        return dataSource;
+        return new HikariDataSource(config);
     }
 
     @Bean

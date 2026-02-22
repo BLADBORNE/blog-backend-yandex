@@ -1,10 +1,11 @@
 package configuration.integration.service;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
 
@@ -18,13 +19,13 @@ public class IntegrationDataSourceConfiguration {
         @Value("${spring.datasource.password}") String password,
         @Value("${spring.datasource.driver-class-name}") String driverName
     ) {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(driverName);
-        dataSource.setUrl(url);
-        dataSource.setUsername(username);
-        dataSource.setPassword(password);
+        HikariConfig config = new HikariConfig();
+        config.setDriverClassName(driverName);
+        config.setJdbcUrl(url);
+        config.setUsername(username);
+        config.setPassword(password);
 
-        return dataSource;
+        return new HikariDataSource(config);
     }
 
     @Bean

@@ -48,7 +48,7 @@ public class PostController {
         return postService.save(requestDto);
     }
 
-    @PutMapping("/{postId}")
+    @PutMapping
     @Validated(value = SavePostMarker.class)
     public PostResponseDto updatePost(@RequestBody @Valid PostUpdateRequestDto requestDto) {
         return postService.update(requestDto);
