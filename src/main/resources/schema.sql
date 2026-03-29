@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS blog.post_comment
 
     CONSTRAINT blog_post_comment_pkey PRIMARY KEY (ID),
     CONSTRAINT blog_post_comment_fkey FOREIGN KEY (POST_ID) REFERENCES blog.post (ID) ON DELETE CASCADE,
-    CONSTRAINT blog_post_text_not_blank CHECK (TRIM(TEXT) <> '')
+    CONSTRAINT blog_post_comment_text_not_blank CHECK (TRIM(TEXT) <> '')
 );
 
 CREATE TABLE IF NOT EXISTS blog.post_file_info
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS blog.post_file_info
     POST_ID   BIGINT       NOT NULL,
 
     CONSTRAINT blog_post_file_info_pkey PRIMARY KEY (FILE_NAME),
-    CONSTRAINT blog_post_comment_fkey FOREIGN KEY (POST_ID) REFERENCES blog.post (ID) ON DELETE CASCADE,
+    CONSTRAINT blog_post_file_info_fkey FOREIGN KEY (POST_ID) REFERENCES blog.post (ID) ON DELETE CASCADE,
     CONSTRAINT blog_post_file_info_not_blank CHECK (TRIM(FILE_NAME) <> ''),
     CONSTRAINT blog_post_file_info_unique UNIQUE (POST_ID)
 );

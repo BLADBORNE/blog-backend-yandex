@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/blog_service_db
+    username: dev
+    password: qwerty
+    driver-class-name: org.postgresql.Driver
+
+  application:
+    name: blog
+
+file:
+  dir:
