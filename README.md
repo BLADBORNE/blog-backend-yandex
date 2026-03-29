@@ -13,10 +13,6 @@
 
 ## Сборка и запуск
 
-1. Собрать проект:
-
-```bash
-mvn clean package
-```
-2. Запустить приложение через Docker Compose docker-compose.yaml
+1. Запустить базу данных через Docker Compose docker-compose.dev.yaml
+2. Запустить проект через в ide во вкладке configurations 
 
